@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ cá nhân</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 transition-all duration-300">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4 text-center">
+        <h1 id="title" class="text-3xl font-bold opacity-0">Hồ sơ cá nhân</h1>
+        <button id="toggleTheme" class="mt-2 px-4 py-2 bg-gray-200 text-black rounded">🌙 Chế độ tối</button>
+    </header>
+
+    <!-- Thông tin cá nhân -->
+    <section class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6 transition-all duration-300">
+        <img id="avatar" src="../assets/images/3.jpg" alt="Avatar" class="w-32 h-32 mx-auto rounded-full border-4 border-blue-500 transition-all duration-300 transform hover:scale-110">
+        <h2 class="text-2xl font-semibold text-center mt-4">Trần Nhật Huy</h2>
+        <p class="text-center text-gray-600">Frontend Developer</p>
+
+        <div class="fade-in">
+            <h3 class="text-xl font-semibold mt-6">Thông tin cá nhân</h3>
+            <ul class="list-disc pl-6 text-gray-700">
+                <li>Họ tên: Trần Nhật Huy</li>
+                <li>Định hướng: Frontend Developer</li>
+                <li>Sở thích: Code, Thiết kế UI/UX</li>
+            </ul>
+        </div>
+
+        <div class="fade-in">
+            <h3 class="text-xl font-semibold mt-6">Quá trình học tập</h3>
+            <ul class="list-disc pl-6 text-gray-700">
+                <li>Đại học CNTT - Môn học: Lập trình Web, Phát triển phần mềm</li>
+                <li>Chứng chỉ: HTML, CSS, JavaScript</li>
+            </ul>
+        </div>
+
+        <div class="fade-in">
+            <h3 class="text-xl font-semibold mt-6">Dự án cá nhân</h3>
+            <ul class="list-disc pl-6 text-gray-700">
+                <li>Website bán hàng online</li>
+                <li>Ứng dụng quản lý công việc</li>
+            </ul>
+        </div>
+
+        <div class="fade-in">
+            <h3 class="text-xl font-semibold mt-6">Liên hệ</h3>
+            <ul class="list-disc pl-6 text-gray-700">
+                <li>Email: nguyenvana@gmail.com</li>
+                <li>LinkedIn: linkedin.com/nguyenvana</li>
+                <li>GitHub: github.com/nguyenvana</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-6">
+        &copy; 2025 Nhóm Công Nghệ Phần Mềm
+    </footer>
+
+    <script>
+        // Hiệu ứng xuất hiện tiêu đề
+        gsap.to("#title", { opacity: 1, y: -10, duration: 1 });
+
+        // Hiệu ứng xuất hiện khi cuộn
+        const fadeElements = document.querySelectorAll(".fade-in");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("opacity-100", "translate-y-0");
+                } else {
+                    entry.target.classList.remove("opacity-100", "translate-y-0");
+                }
+            });
+        }, { threshold: 0.2 });
+
+        fadeElements.forEach(el => {
+            el.classList.add("opacity-0", "translate-y-6", "transition-all", "duration-700");
+            observer.observe(el);
+        });
+
+        // Chế độ sáng/tối
+        const toggleThemeBtn = document.getElementById("toggleTheme");
+        toggleThemeBtn.addEventListener("click", () => {
+            document.body.classList.toggle("bg-gray-900");
+            document.body.classList.toggle("text-white");
+            document.querySelector("section").classList.toggle("bg-gray-800");
+            document.querySelector("section").classList.toggle("text-gray-300");
+
+            if (document.body.classList.contains("bg-gray-900")) {
+                toggleThemeBtn.textContent = "☀️ Chế độ sáng";
+            } else {
+                toggleThemeBtn.textContent = "🌙 Chế độ tối";
+            }
+        });
+    </script>
+
+</body>
+</html>
